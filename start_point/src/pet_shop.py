@@ -75,28 +75,31 @@ def customer_can_afford_pet(customer, new_pet):
     else:
         return False
 
-# 21.
+# 21. & 22.
 def sell_pet_to_customer(shop, desired_pet, customer):
     # Check desired pet is in the shop
-    pet_price = desired_pet["price"]
+    if not desired_pet:
+        return "Pet not found"
+    else:
+        pet_price = desired_pet["price"]
 
-    # Check customer can afford the pet
-    if customer_can_afford_pet(customer, desired_pet) == True:
+        # Check customer can afford the pet
+        if customer_can_afford_pet(customer, desired_pet) == True:
+            
+            # If they can, proceed with purchase
+            # Remove cash from customer
+            remove_customer_cash(customer, pet_price)
+            # Add cash to shop
+            add_or_remove_cash(shop, pet_price)
+            # Add pet to customer
+            add_pet_to_customer(customer, desired_pet)
+            # Remove pet from shop & increase pets sold
+            remove_pet_by_name(shop, desired_pet) # Not in test but presumably only 1 of each pet in stock?
+            increase_pets_sold(shop, 1)
         
-        # If they can, proceed with purchase
-        # Remove cash from customer
-        remove_customer_cash(customer, pet_price)
-        # Add cash to shop
-        add_or_remove_cash(shop, pet_price)
-        # Add pet to customer
-        add_pet_to_customer(customer, desired_pet)
-        # Remove pet from shop & increase pets sold
-        remove_pet_by_name(shop, desired_pet) # Not in test but presumably only 1 of each pet in stock?
-        increase_pets_sold(shop, 1)
-    
-    # Error if cannot afford
-    else: 
-        return "Customer cannot afford pet"
+        # Error if cannot afford
+        else: 
+            return "Customer cannot afford pet"
 
 
     
