@@ -68,14 +68,14 @@ def get_customer_pet_count(customer):
 def add_pet_to_customer(customer, new_pet):
     customer["pets"].append(new_pet)
 
-# 18. & 19. & 20.
+# 18., 19. & 20.
 def customer_can_afford_pet(customer, new_pet):
     if get_customer_cash(customer) >= new_pet["price"]:
         return True
     else:
         return False
 
-# 21. & 22.
+# 21., 22. & 23.
 def sell_pet_to_customer(shop, desired_pet, customer):
     # Check desired pet is in the shop
     if not desired_pet:
@@ -100,6 +100,3 @@ def sell_pet_to_customer(shop, desired_pet, customer):
         # Error if cannot afford
         else: 
             return "Customer cannot afford pet"
-
-
-    
